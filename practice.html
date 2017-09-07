@@ -1,0 +1,222 @@
+<html>
+<head>
+   <title></title>
+   <script
+        src="http://code.jquery.com/jquery-1.12.4.js"
+        integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+        crossorigin="anonymous"></script>
+        <style type="text/css">
+            .content{
+               width:auto;
+               height:auto;
+               float:left;
+               clear:both;
+               padding: 4px;
+            }
+            .content1{
+               width:auto;
+               height:auto;
+               float:left;
+               clear:both;
+               padding: 4px;
+            }
+        </style>
+</head>
+<body>
+  <div class="drop">
+      <div class="dropdown1">
+            <div class="content">option1</div>
+            <div class="content1" style="display:none;">hbvhikgvd  kuhv nvk nkvjd hjvhjfd</div>
+      </div>
+      <div class="dropdown2">
+            <div class="content">option2</div>
+            <div class="content1" style="display:none;">hbvhikgvd  kuhv nvk nkvjd hjvhjfd</div>
+      </div>
+      <div class="dropdown3">
+            <div class="content">option3</div>
+            <div class="content1" style="display:none;">hbvhikgvd  kuhv nvk nkvjd hjvhjfd</div>
+      </div>
+  </div>
+<script type="text/javascript">
+    function partition(arr, low, high){
+   var i = low -1;
+   var pivot = arr[high];
+   for(var k = low; k < high; k++){
+      if(arr[k] <= pivot){
+         i++;
+         var temp = arr[i];
+         arr[i] = arr[k];
+         arr[k] = temp;
+      }  
+   }
+   //console.log('before partition',arr);
+   var temp = arr[i+1];
+   arr[i+1] = arr[high];
+   arr[high] = temp;
+   //console.log('after partition',arr)
+   return (i+1); 
+}
+
+function quickSort(arr, low , high){
+  if(low < high){
+   var p1 = partition(arr, low, high);
+   //console.log(p1,'one');
+   quickSort(arr, 0 ,p1-1);
+   //console.log(p1,'two');
+   quickSort(arr, p1+1, high);  
+   //console.log(p1,'three');
+  }
+}
+var arr = [1,0,3,4,5,2];
+quickSort(arr, 0 , arr.length-1);
+
+//console.log(arr);
+
+var exp = '3553853335' ;
+var expCounts = {};
+var maxKey = '';
+for(var i = 0; i < exp.length; i++)
+{
+    var key = exp[i];
+    if(!expCounts[key]){
+     expCounts[key] = 0;
+    }
+    expCounts[key]++;
+    if(maxKey === '' || expCounts[key] > expCounts[maxKey]){
+        maxKey = key;
+    }
+}
+//console.log(maxKey + ":" + expCounts[maxKey]);
+
+var a = [34, 203, 3, 746, 200, 984, 198, 764, 9];
+ 
+function mergeSort(arr)
+{
+    if (arr.length < 2)
+        return arr;
+ 
+    var middle = parseInt(arr.length / 2);
+    var left   = arr.slice(0, middle);
+    var right  = arr.slice(middle, arr.length);
+ 
+    return merge(mergeSort(left), mergeSort(right));
+}
+ 
+function merge(left, right)
+{
+    var result = [];
+ 
+    while (left.length && right.length) {
+        if (left[0] <= right[0]) {
+            result.push(left.shift());
+        } else {
+            result.push(right.shift());
+        }
+    }
+ 
+    while (left.length)
+        result.push(left.shift());
+ 
+    while (right.length)
+        result.push(right.shift());
+ 
+    return result;
+}
+ 
+console.log(mergeSort(a));
+
+var str = [
+    {
+     'city' : 'ban',
+     'state' : 'kar'
+    },
+     {
+     'city' : 'pun',
+     'state' : 'mhr'
+    },
+    {
+     'city' : 'tum',
+     'state' : 'kar'
+    },
+    {
+     'city' : 'mum',
+     'state' : 'mhr'
+    },
+     {
+     'city' : 'banga',
+     'state' : 'kar'
+    },
+     {
+     'city' : 'manga',
+     'state' : 'kar'
+    }
+];
+//var res = [];
+function maxRepeatingChar(str){
+  var epCount = {};
+  
+  var maxKey = "";
+  for(var i =0; i < str.length;i++){
+     var key = str[i].state;
+      var res = [];
+     if(!epCount[key]){
+        var res = [];
+        res.push(str[i].city);
+        epCount[key] = res;
+     }else{
+       res.push(str[i].city)
+       epCount[key] = res;
+     }
+  }
+  console.log(epCount,res);
+ return maxKey;  
+}
+console.log(maxRepeatingChar(str));
+
+
+var sum = function(num1,num2){
+  return num1 +num2;
+}
+ 
+var multiply = function(num1,num2){
+  return num1 * num2;
+}
+var operation = function(num1 , num2 , callback){
+      if(typeof callback === 'function'){
+           console.log(callback(num1, num2));
+      }
+}
+
+operation(10,20, sum);
+
+
+
+function perms(data){
+    data = data.slice();
+    var permutations = [];stack = [];
+    function doPerms(){
+        if(data.length === 0){
+            permutations.push(stack.slice());
+        }else{
+           for(var i = 0; i < data.length;i++){
+               var x = data.splice(i,1);
+               stack.push(x);
+               doPerms();
+               stack.pop();
+               data.splice(i,0,x);
+           }
+        }
+    }
+    doPerms();
+    return permutations;
+}
+
+var input = 'abcd'.split('');
+var result = perms(input);
+for(var i =0; i < result.length;i++){
+    result[i] = result[i].join('');
+}
+console.log(result);
+</script>
+</body>
+</html>

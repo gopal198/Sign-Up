@@ -1,0 +1,131 @@
+<html>
+<head>
+	<title>sudoko game</title>
+</head>
+<body>
+   <div id="div#" style="width:95px;height:50px;">	
+	<div id="div1"></div>
+	<div id="div2"></div>
+	<div id="div3"></div>
+	<div id="div4"></div>
+	<div id="div5"></div>
+	<div id="div6"></div>
+	<div id="div7"></div>
+	<div id="div8"></div>
+	<div id="div9"></div>
+    <script type="text/javascript">
+          var app = [
+              [2,4,5],
+              [6,1,7],
+              [8, ,3]
+         ];
+          
+          for(var i = 0 ; i < app.length;i++){
+  for(var j =0; j < app[i].length;j++){
+        var div[i][j] = document.createElement('div');
+        div[i][j].style.border = '1px solid black';
+        div[i][j].style.padding = '3px'; 
+        div[i][j].textContent = Math.floor(Math.random()*10);
+        document.body.appendChild(div[i][j]);
+  }
+}
+
+         var div = document.getElementById('div1');
+         div.style.color = 'black';
+         div.style.border = '1px solid black';
+         div.style.padding = '5px';
+         div.style.margin = '0 4px 4px 0';
+         div.style.float = 'left';
+         div.textContent = app[0][0];
+
+          var div = document.getElementById('div2');
+         div.style.color = 'black';
+         div.style.border = '1px solid black';
+         div.style.padding = '5px';
+         div.style.margin = '0 4px 4px 0';
+         div.style.float = 'left';
+         div.textContent = app[0][1];
+
+          var div = document.getElementById('div3');
+         div.style.color = 'black';
+         div.style.border = '1px solid black';
+         div.style.padding = '5px';
+         div.style.margin = '0 4px 4px 0';
+         div.style.float = 'left';
+         div.textContent = app[0][2];
+
+          var div = document.getElementById('div4');
+         div.style.color = 'black';
+         div.style.border = '1px solid black';
+         div.style.padding = '5px';
+         div.style.margin = '0 4px 4px 0';
+         div.style.float = 'left';
+         div.textContent = app[1][0];
+
+          var div = document.getElementById('div5');
+         div.style.color = 'black';
+         div.style.border = '1px solid black';
+         div.style.padding = '5px';
+         div.style.margin = '0 4px 4px 0';
+         div.style.float = 'left';
+         div.textContent = app[1][1];
+
+          var div = document.getElementById('div6');
+         div.style.color = 'black';
+         div.style.border = '1px solid black';
+         div.style.padding = '5px';
+         div.style.margin = '0 4px 4px 0';
+         div.style.float = 'left';
+         div.textContent = app[1][2];
+
+          var div = document.getElementById('div7');
+         div.style.color = 'black';
+         div.style.border = '1px solid black';
+         div.style.padding = '5px';
+         div.style.margin = '0 4px 4px 0';
+         div.style.float = 'left';
+         div.textContent = app[2][0];
+
+          var div = document.getElementById('div8');
+         div.style.color = 'black';
+         div.style.border = '1px solid black';
+         div.style.padding = '5px';
+         div.style.margin = '0 4px 4px 0';
+         div.style.float = 'left';
+         div.textContent = app[2][1];
+
+          var div = document.getElementById('div9');
+         div.style.color = 'black';
+         div.style.border = '1px solid black';
+         div.style.padding = '5px';
+         div.style.margin = '0 4px 4px 0';
+         div.style.float = 'left';
+         div.textContent = app[2][2];
+         document.addEventListener('keydown',function(events){
+              //console.log(events);
+              if(events.keyCode === 37){
+                 console.log('37');
+                 var tar = events.target;
+                 for(var i = 0; i < 9 ; i++){
+                    console.log(tar.children[0].children[i].textContent,i);
+                    if(tar.children[0].children[i].textContent === ''){
+                         console.log('found empty element');
+                    }
+                 }
+
+              }
+              if(events.keyCode === 38){
+                 console.log('38');
+              }
+              if(events.keyCode === 39){
+                 console.log('39');
+              }
+              if(events.keyCode === 40){
+                console.log('40');
+              }
+         });
+         
+
+    </script>
+</body>
+</html>
