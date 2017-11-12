@@ -1,0 +1,246 @@
+ <!--  <div class="box-showing-multiple-files">
+                      <div class="box-showing-multiple-files-inner" ng-repeat="fil in content.documentMapList">
+                           <div style="width:96%;float:left" ng-repeat="(key,val) in fil">{{val}}</div>
+                           <div style="width:4%;float:left" ng-click="content.documentMapList.splice($index,1)">&#10006;</div>
+                      </div>
+                      <div class="box-showing-multiple-files-inner" ng-repeat="fil in multiFiles">
+                               <div style="width:96%;float:left">{{fil}}</div>
+                               <div style="width:4%;float:left" ng-click="multiFiles.splice($index,1)">&#10006;</div>
+                          </div>
+                  </div> -->
+
+                  <div class="col-md-7 text-center" ng-if="showRoles.isRoles">
+                 <select class="form-control" id="role" ng-model="selectedRole[$index]" ng-selected="{{role.name == userRole.role.name}}" ng-options="role.id as role.name for role in roles" required>
+                    <!--  <option value="" selected disabled>Role</option>
+                     <option  ng-repeat="role in roles" value="{{role.id}}">{{role.name}}</option> -->
+                 </select>
+            </div>
+
+            <div class="modal-header">
+    <h3 class="modal-title">Edit User</h3>
+</div>
+<div class="modal-body edit-user-dialog">
+  <tabset>
+  <tab heading="Details">
+    <p/>
+    <p/>
+      <div class="row">
+    <form class="form-horizontal col-sm-20" name="editUser" role="form" novalidate>
+      <div class="form-group">
+          <label for="first-name" class="col-sm-7 control-label">First Name</label>
+          <div class="col-sm-14">
+              <input type="text" class="form-control" id="first-name" placeholder="First Name" ng-model="user.firstName" required maxlength="255">
+          </div>'
+      </div>
+      <div class="form-group">
+          <label for="last-name" class="col-sm-7 control-label">Last Name</label>
+          <div class="col-sm-14">
+              <input type="text" class="form-control" id="last-name" placeholder="Last Name" ng-model="user.lastName" maxlength="255">
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="email" class="col-sm-7 control-label">Email</label>
+          <div class="col-sm-14">
+              <input type="text" class="form-control" id="email" placeholder="Email ID" ng-model="user.email" readonly=true required>
+          </div>
+      </div>
+
+      <div class="form-group">
+       <label for="User Company" class="col-sm-7 control-label">Company</label>
+       <div class="col-sm-14">
+             <input type="text" name="company" class="form-control" ng-model="user.company"/>
+       </div>
+    </div>
+    
+     <div class="form-group">
+       <label for="User Qualification" class="col-sm-7 control-label">Qualification</label>
+       <div class="col-sm-14">
+             <input type="text" name="company" class="form-control" ng-model="user.qualification"/>
+       </div>
+    </div>
+
+     <div class="form-group">
+       <label for="User Role" class="col-sm-7 control-label">Role</label>
+       <div class="col-sm-14">
+             <input type="text" name="role" class="form-control" ng-model="user.role"/>
+       </div>
+    </div>
+
+    <div class="form-group">
+        <label for="User Location" class="col-sm-7 control-label">Location</label>
+        <div class="col-sm-14">
+            <input type="text" name="location" class="form-control" ng-model="user.location" />
+        </div>
+    </div>
+
+    <div class="form-group">
+       <label for="Experience In Years" class="col-sm-7 control-label">Experience</label>
+       <div class="col-sm-14">
+           <input type="text" name="experience" class="form-control" ng-model="user.experience"/>
+       </div>
+    </div>
+
+    <div class="form-group">
+        <label for="User Industry" class="col-sm-7 control-label">Industry</label>
+        <div class="col-sm-14 col-sm-offset-7" ng-repeat="choice in choices" id="{{choice.id}}" style="position:relative;top:-20px;margin-bottom:4px">
+             <div class="col-sm-21">
+                 <input type="text" name="industry" class="form-control" ng-model="choice.name"/>
+             </div>
+             <div class="col-sm-3">
+                  <button type="button" style=" background: #C76868;color: #FFF;font-weight: bold;font-size: 21px;border: 0;cursor: pointer;display: inline-block;padding: 4px 9px;vertical-align: top;line-height: 100%;width:100%;border-radius:3px;" ng-show="$last" ng-click="removeChoice()">-</button>
+             </div>
+        </div>
+        <div class="col-sm-14 col-sm-offset-7" style="margin-top:-9px">
+            <button type="button" class="btn-btn-primary" ng-click="addNewChoice()">add industry</button>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="User Specialization" class="col-sm-7 control-label">Specialization</label>
+        <div class="col-sm-14 col-sm-offset-7" ng-repeat="specialist in specialisation" id="{{specialist.id}}" style="position:relative;top:-20px;margin-bottom:4px">
+             <div class="col-sm-21">
+                 <input type="text" name="industry" class="form-control" ng-model="specialist.name"/>
+             </div>
+             <div class="col-sm-3">
+                  <button type="button" style=" background: #C76868;color: #FFF;font-weight: bold;font-size: 21px;border: 0;cursor: pointer;display: inline-block;padding: 4px 9px;vertical-align: top;line-height: 100%;width:100%;border-radius:3px;" ng-show="$last" ng-click="removeSpecialisation()">-</button>
+             </div>
+        </div>
+        <div class="col-sm-14 col-sm-offset-7" style="margin-top:-9px">
+            <button type="button" class="btn-btn-primary" ng-click="addNewSpecialisation()">add specialisation</button>
+        </div>
+    </div>
+
+      <div >
+     <div class="form-group">
+    <label for="oneLiner" class="col-sm-7 control-label">One liner</label>
+    <div class="col-sm-14">
+      <input type="text" name="oneLiner" id="Text1" class="form-control" ng-model="user.oneLiner" maxlength="255"/>
+    </div>
+  </div>
+ <div class="form-group">
+    <label for="aboutMe" class="col-sm-7 control-label">About me</label>
+    <div class="col-sm-14">
+      <input type="text" name="aboutMe" id="Text2" class="form-control" ng-model="user.aboutMe" maxlength="255"/>
+    </div>
+  </div>
+ <div class="form-group">
+    <label for="userName" class="col-sm-7 control-label">LinkedIn Url</label>
+    <div class="col-sm-14">
+      <input type="url" name="linkedIn" id="Text3" class="form-control" ng-model="user.linkedIn" maxlength="255"/>
+      <div ng-show="createSpaceUser.linkedIn.$invalid">
+        <span ng-show="createSpaceUser.linkedIn.$error.url">Not a valid url</span>
+      </div>
+    </div>
+  </div>
+ <div class="form-group">
+    <label for="photo" class="col-sm-7 control-label">Photo</label>
+    <div class="col-sm-14">
+      <input type="file" name="photo" id="Text7" class="form-control" ng-model="userPhoto" accept="image/*" ng-file-select/>
+    </div>
+  </div>
+     </div>
+     <hr/>
+      <div class="form-group">
+          <div class="col-sm-offset-5 col-sm-14">
+              <input type="button" class="btn btn-warning" ng-click="cancel()" value="Cancel"> &nbsp;
+              <input type="button" class="btn btn-success" ng-click="save()" value="Save" ng-disabled="!editUser.$valid">
+          </div>
+      </div>
+    </form>
+          <img ng-src="{{userPhotoFromServer?userPhotoFromServer:'css/img/persona-placeholder.png'}}"
+               class="user-profile-image float-right"/>
+          </div>
+  </tab>
+  <tab heading="Roles">
+    <p/>
+    <p/>
+    <div class="alert alert-danger" role="alert" ng-if="apiError">{{apiError}}</div>
+    <form class="form-horizontal" name="editRoles" role="form" novalidate>
+      <div class="form-group">
+          <div class="col-md-7 text-center h4">Domain</div>
+          <div class="col-md-7 text-center h4">Role</div>
+          <div class="col-md-7 text-center h4">Premium</div>
+          <div class="col-md-3 h4"></div>{{userChange}}
+          <div ng-repeat="userRole in currentSelection.userRoles">
+            <div class="col-md-7 text-center" >{{userRole.space.name}}</div>
+            <div class="col-md-7 text-center" ng-if="!showRoles.isRoles">{{userRole.role.name}}</div>
+            <div class="col-md-7 text-center" ng-if="showRoles.isRoles && (selectedIndex === $index)">
+                 <select class="form-control" id="role" ng-model="userChange.role" required>
+                     <option value="" selected disabled>Role</option>
+                     <option ng-selected="{{role.name == userRole.role.name}}" ng-repeat="role in roles" value="{{role.id}}">{{role.name}}</option>
+                 </select>
+            </div>
+            <div class="col-md-7 text-center" ng-if="!showRoles.isRoles">{{userRole.role.isPremium}}</div>
+            <div class="col-md-7 text-center" ng-if="showRoles.isRoles && (selectedIndex === $index)">
+                   <select class="form-control" id="role" ng-model="userChange.premium" required>
+                      <option value="" selected disabled>Premium</option>
+                      <option value="true" ng-selected="premiumAccess === true">Yes</option>
+                      <option value="false" ng-selected="premiumAccess === false">No</option>
+                   </select>
+            </div>
+            <div class="col-md-3 btn btn-danger btn-sm" ng-if="isWorldUser() || isOrgUser()" ng-click="removeRole(user.id, userRole.space.id, userRole.role.id, $index)">
+              <i class="glyphicon glyphicon-trash"></i>
+            </div>
+            <div class="col-md-3 btn btn-danger btn-sm" ng-if="isDomainUser() && (showRoles.isRoles = !showRoles.isRoles)" ng-click="showRoles.isRoles = !showRoles.isRoles;selectIndex($index)">
+              <i class="glyphicon glyphicon-pencil"></i>
+            </div>
+            <div class="col-md-3 btn btn-success btn-sm" ng-if="isDomainUser() && (showRoles.isRoles = !showRoles.isRoles) && (selectedIndex === $index)" ng-click="editRoleandPremium(user.id , userChange, userRole.space.name)">
+              <i class="glyphicon glyphicon-save"></i>
+            </div>
+          </div>
+      </div>
+      <div class="form-group">
+          <div class="col-sm-7" ng-if="isWorldUser() || isOrgUser()">
+              <select class="form-control" id="domain" ng-model="userRole.space" ng-options="space.name group by space.type for space in spaceListing" required>
+              </select>
+          </div>
+          <div class="col-sm-7" ng-if="isDomainUser()">
+              <select class="form-control" id="domain" ng-model="userRole.space" required>
+                 <option ng-repeat="spaceDiff in currentSelection.userRoles" value="{{spaceDiff.space.id}}">{{spaceDiff.space.name}}</option>
+              </select>
+          </div>
+          <div class="col-sm-7">
+              <select class="form-control" id="role" ng-model="userRole.role" required>
+                <option value="" selected disabled>Role</option>
+                <option ng-repeat="role in roles" value="{{role.id}}">{{role.name}}</option>
+              </select>
+          </div>
+          <div class="col-sm-7">
+              <select class="form-control" id="role" ng-model="userRole.isPremium" required>
+                <option value="" selected disabled>Premium</option>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
+          </div>
+          <div class="col-md-3">
+            <div class="btn btn-success" ng-click="addRole(user.id, userRole)" value="Save" ng-disabled="!editRoles.$valid">
+              <i class="glyphicon glyphicon-save"></i>
+            </div>
+          </div>
+      </div>
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-10">
+                <input type="button" class="btn btn-warning" ng-click="sendEmailNotification(user.id)" value="Send Notification Email for BCIC Domain user">
+            </div>
+        </div>
+      <hr/>
+      <div class="form-group">
+          <div class="col-sm-offset-3 col-sm-10">
+              <input type="button" class="btn btn-warning" ng-click="$dismiss('close')" value="Close">
+          </div>
+      </div>
+  </tab>
+  </tabset>
+</div>
+
+api problem 
+
+http://139.162.1.39:8082/api/space/1
+http://139.162.1.39:8082/api/role/
+http://139.162.1.39:8082/api/space/1/child/
+
+139.162.1.39:8082 
+india gst - role client
+ifc - role approver 
+
+edit dashboard button in india gst is coming but it should not come for role client

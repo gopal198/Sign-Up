@@ -1,0 +1,235 @@
+<html>
+<head>
+	<title>the edit item</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap.css">
+	<script src="angular/angular.js"></script>
+    <script src="angular/angular-animate.min.js"></script>
+    <script src="angular/angular-sanitize.js"></script>
+    <script src="bootstrap/ui-bootstrap-tpls-0.6.0.js"></script>
+    <style>
+       th, td{
+         padding : 5px;
+         text-align: center;
+       }
+    </style>
+</head>
+<body ng-app="myitem" ng-controller="myitemctrl">
+     <div class="container">  
+        <h1>Two Column Layouts</h1>  
+        <!--First row with column number(4,8)-->  
+        <div class="row">  
+            <div class="col-sm-4" style="background-color:#8dc1aa">column1: col-sm-4</div>  
+            <div class="col-sm-8" style="background-color:#808080">column2: col-sm-8</div>  
+        </div>  
+        <!--Second row with column number(6,6)-->  
+        <div class="row">  
+            <div class="col-sm-6" style="background-color:#cfa6e2">column3: col-sm-6</div>  
+            <div class="col-sm-6" style="background-color:#faa76c">column4: col-sm-6</div>  
+        </div>  
+        <!--Third row with column number(3,9)-->  
+        <div class="row">  
+            <div class="col-sm-3" style="background-color:#c8fcfc">column5: col-sm-3</div>  
+            <div class="col-sm-9" style="background-color: #79ad96">column6: col-sm-9</div>  
+        </div>  
+    </div> 
+    <table class="table table-responsive table-bordered" ng-repeat="art in artist">{{artist}}
+          <thead>
+                <th>name</th>
+                <th>roles</th>
+                <th>skills</th>
+          </thead>
+          <tbody>
+               <tr>
+                   <td>{{art.name}}</td>
+                   <td>{{art.role}}</td>
+                   <td>
+                       <table class="table table-responsive table-bordered">
+                        <tbody>
+                               <tr ng-repeat="ar in art.skills">
+                                <td>{{ar.java}}</td>
+                                <td>{{ar.angular}}</td>
+                              </tr>
+                        </tbody>
+                        
+                      </table>
+                   </td>
+               </tr>
+              
+          </tbody>
+    </table>
+    DOB<input type="text" ng-model="user.dob" class="form-control"><span ng-if="invalidInput">invalid date</span>
+    <h4>Formatting codes playground</h4>
+  <p class="form-group">
+    <label>Define your format</label>
+    <input type="text" ng-model="format" class="form-control">
+  </p>
+  <p class="form-group">
+    <label>Result</label>
+    <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="date" />
+  </p> 
+    <div ng-init="sum = true">
+         <div ng-show="sum">jfvdf</div>
+    </div>
+   
+    <table>
+         <tr>
+             <th>Item 1</th>
+             <th>Item 2</th>
+         </tr>
+         <tr ng-repeat="i in item">
+             <td>{{i.name}}</td>
+             <td>{{i.price}}</td>
+         </tr>
+    </table>
+    <button type="button" ng-click="showDiv1()">add item</button>
+    <button type="button" ng-click="editItem(dest)">edit item</button>
+    <div >
+         <div ng-repeat="i in dest">
+             <input type="text" ng-model="i.name"><input type="text" ng-model="i.price">
+         </div>
+    </div>
+    <pre>Selected date is: <em>{{dt | date:'fullDate' }}</em></pre>
+
+    <h4>Inline</h4>
+    <div style="display:inline-block; min-height:290px;">
+      <div uib-datepicker ng-model="dt" class="well well-sm" datepicker-options="options"></div>
+    </div>
+
+    <hr />
+    <button type="button" class="btn btn-sm btn-info" ng-click="today()">Today</button>
+    <button type="button" class="btn btn-sm btn-default" ng-click="setDate(2009, 7, 24)">2009-08-24</button>
+    <button type="button" class="btn btn-sm btn-danger" ng-click="clear()">Clear</button>
+    <button type="button" class="btn btn-sm btn-default" ng-click="toggleMin()" uib-tooltip="After today restriction">Min date</button>
+    <div ng-click="showDiv1()">clean</div>
+    <script type="text/javascript">
+	  var app = angular.module('myitem',[ 'ngAnimate','ngSanitize','ui.bootstrap']);
+	  app.controller('myitemctrl',function($scope,$q ){
+            $scope.format = 'yyyy/MM/dd';
+            $scope.date = new Date();
+            $scope.today = function() {
+    $scope.dt = new Date();
+    $scope.artist = [{
+          'name':'Gopal',
+          'role': 'UI developer',
+          'skills' : [{
+             'java':'1',
+             'angular':'1'
+          }]
+         }];
+       $scope.user = {};
+       $scope.$watch('user.dob',function(newVal,old){
+           //console.log(newVal,old);
+           if(newVal > 12){
+               console.log('bingo');
+               $scope.invalidInput = false;
+           }else{
+              $scope.invalidInput = true;
+           }
+       });
+       
+       $scope.showDiv1 = function(){
+          var deferred = $q.defer();
+            var clean =  true;
+            if(clean){
+
+                deferred.resolve('clean');
+            }else{
+                deferred.reject('not clean');
+            }
+          return deferred.promise;
+       }
+       $scope.showDiv1().$promise.then(function(r){console.log(r)});
+  };
+  //$scope.today();
+
+  $scope.clear = function() {
+    $scope.dt = null;
+  };
+
+  $scope.options = {
+    customClass: getDayClass,
+    minDate: new Date(),
+    showWeeks: true
+  };
+
+  // Disable weekend selection
+  function disabled(data) {
+    var date = data.date,
+      mode = data.mode;
+    return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+  }
+
+  $scope.toggleMin = function() {
+    $scope.options.minDate = $scope.options.minDate ? null : new Date();
+  };
+
+  $scope.toggleMin();
+
+  $scope.setDate = function(year, month, day) {
+    $scope.dt = new Date(year, month, day);
+  };
+
+  var tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  var afterTomorrow = new Date(tomorrow);
+  afterTomorrow.setDate(tomorrow.getDate() + 1);
+  $scope.events = [
+    {
+      date: tomorrow,
+      status: 'full'
+    },
+    {
+      date: afterTomorrow,
+      status: 'partially'
+    }
+  ];
+
+  function getDayClass(data) {
+    var date = data.date,
+      mode = data.mode;
+    if (mode === 'day') {
+      var dayToCheck = new Date(date).setHours(0,0,0,0);
+
+      for (var i = 0; i < $scope.events.length; i++) {
+        var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
+
+        if (dayToCheck === currentDay) {
+          return $scope.events[i].status;
+        }
+      }
+    }
+
+    return '';
+  }
+	       $scope.item = [
+	           {name : 'dosa' , price : 'Rs 25/plate'},
+	           {name : 'idli' , price : 'Rs 30/plate'}
+	       ];
+	       $scope.dest = [];
+	       angular.copy($scope.item , $scope.dest);
+	       $scope.editItem = function(edit){
+	       	 angular.copy(edit,$scope.item);
+	       }
+         
+            /*var array = [1,2,3,4,5,6];
+            function shuffle(array) {
+               
+                var tmp, current, top = array.length;
+
+                if (top) {
+                  while (--top) {
+                    current = Math.floor(Math.random() * (top + 1));
+                    tmp = array[current];
+                    array[current] = array[top];
+                    array[top] = tmp;
+                  }
+                }
+
+                return array;
+              }
+              shuffle(array)*/
+	  })
+    </script>
+</body>
+
+</html>

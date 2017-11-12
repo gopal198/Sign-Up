@@ -1,0 +1,22 @@
+<html ng-app="app.directive">
+<head >
+	<title>practice different directive</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-animate.js"></script>
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-sanitize.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.js"></script> -->
+	<script src="directive.js"></script>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body ng-controller="directiveCtrl">
+	<!-- <ui-cust sum ></ui-cust> -->
+	<input type="text" ng-model="name1">
+	<input type="text" ng-model="name2">
+	<div custom-dynamic ng-model="name1"></div>
+	<div custom-dynamic ng-model="name1"></div>
+	<div custom-dynamic-string ng-mode="{{name2}}"></div>
+	<div custom-dynamic-func click-me="doClick()"></div>
+	<!-- <div custom-dynamic ng-model="name"></div> -->
+	<uib-accordion ></uib-accordion>
+</body>
+</html>

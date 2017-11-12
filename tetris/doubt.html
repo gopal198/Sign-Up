@@ -1,0 +1,147 @@
+<html>
+<head>
+  <title></title>
+  <script
+        src="https://code.jquery.com/jquery-1.12.4.js"
+        integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+        crossorigin="anonymous"></script>
+        <style>
+             #abc{
+               color:red;
+             }
+             #xy{
+               color:red;
+             }
+        </style>
+</head>
+<body>
+  <div id="xy" style="color:blue">vffvvf</div>
+  <div id="abc">uuu</div>
+  <div id="abc">uiuiui</div>
+ <script type="text/javascript">
+      var ar = [3, 5, 4, 2, 6, 3, 0, 0, 5, 4, 8, 3];
+      var x=3;var y = 6;var sd = [];var efficientDistance = ar.length;
+      for(var i=0; i < ar.length;i++){
+         if(ar[i] == x || ar[i]==y){
+             var ob = {};
+             if(!ob[ar[i]]){
+                 ob[ar[i]] = i;
+             }
+             sd.push(ob);
+         }
+      }
+      console.log(sd);
+      //var sd = [{2:0},{3:2},{2:4},{3:5}];
+      var d1,d2,dmin=0,d=[];
+      for(var i=0;i< sd.length;i++){
+         var ob = sd[i];
+         for(key in ob){
+           console.log(key);
+           if(key == x){
+            d1 = ob[key];
+            console.log(d1);
+           }
+           if(key == y){
+            d2 = ob[key];
+            console.log(d2);
+           }
+         }
+          if(d1 !== undefined && d2 !== undefined){
+              console.log(d2,d1);
+              if(d1 > d2){
+                d.push(d1-d2);
+              }else{
+                d.push(d2 - d1);
+              }
+              
+              console.log(d,'1');
+          }
+      }
+      var min = d[0];
+      for(var i=0;i<d.length;i++){
+         if(min > d[i]){
+            min = d[i];
+         }
+      }
+     console.log(min);
+
+     //simple method of finding distance between two number
+     var arr = [3, 5, 4, 2, 6, 5, 6, 6, 5, 4, 8, 3];
+     var a = 3,b=6;
+     var min_distance = arr.length;
+     function minDistance(arr,a,b){
+        for(var i=0;i < arr.length;i++){
+           for(var j =i+1;j < arr.length;j++){
+                if((a === arr[i] && b === arr[j] || b === arr[i] && a === arr[j]) && (min_distance > Math.abs(i - j))){
+                     min_distance = Math.abs(i-j);
+                }
+           }
+        }
+        return min_distance;
+     }
+     console.log(minDistance(arr,a,b));
+
+     //trciky method to find the distance between two number
+     function efficientMinDistance(ar,x,y){
+         var prev;
+         //gives the index of any of the two elements which first matches with any of the two number
+         for(var i=0;i < ar.length;i++){
+            if(x === ar[i] || y === ar[i]){
+                 prev = i;
+                 break;
+            }
+         }
+         //
+         for(;i<ar.length;i++){
+            //find the occurence of index of any of the two elements which matches of any  of the two number and then check prev match with current match if they are not equal then it 
+             //sets minimum distance value
+               if(x === ar[i] || y === ar[i]){
+
+                if(ar[prev] != ar[i] && (i - prev) < efficientDistance){
+                     efficientDistance = i - prev;
+                     prev = i;
+                }else{
+                     prev = i;
+                }
+              }
+         } 
+         return efficientDistance;
+     }
+     console.log(efficientMinDistance(ar,x,y));
+
+     function inputData(){
+        var i = 10;
+        //alert(i);
+        return function(j){
+            i += j;
+            // alert(j);
+            return i;
+        }
+     }
+     var inp =inputData();
+     console.log(inp(20));
+     console.log(inp(20));
+
+     var arr = [1,6,2,7,8,10,11,23,5];
+    function subArrayOfNumber(arr,sum){
+      var start = 0;
+      var curr_sum=arr[0];
+      for(var i =1;i < arr.length; i++){ 
+          if(curr_sum > sum && start < i-1){
+              curr_sum = curr_sum - arr[start];
+              start++;
+          }else{
+             if(i < arr.length){
+                curr_sum = curr_sum +arr[i];
+             }
+          }
+           if(curr_sum == sum){
+             console.log("the sub array is found"+start+'and'+(i-start));
+             break;
+          }
+      }
+    }
+    subArrayOfNumber(arr,10);
+</script>
+</body>
+</html>
