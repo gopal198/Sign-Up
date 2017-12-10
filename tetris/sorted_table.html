@@ -1,0 +1,90 @@
+<html>
+<head>
+	<title>My Sorted Table</title>
+  <style>
+      .heading{
+         width: 25%;
+      }
+      .cursor{
+        cursor: pointer;
+      }
+      #divLeft{
+        width: 50%;
+        float: left;
+        margin-right: 10%;
+      }
+      #divRight{
+        width: 40%;
+        float: left; 
+      }
+      tr:nth-of-type(even){
+        background: #f7f7f7;
+      }
+  </style>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body ng-app="sortedTableApp" ng-controller="sortedTableCtrl">
+     <table class="table table-responsive" style="width:800px;margin:0px auto">
+         <thead>
+              <th class="heading">
+                  <div class="subHead" id="divLeft">userId</div>
+              	  <div class="subHead" id="divRight">
+                      <div ng-click="myOrderBy('userId','up')"><i class="fa fa-chevron-up cursor"></i></div>
+                      <div ng-click="myOrderBy('userId','down')"><i class="fa fa-chevron-down cursor"></i></div>
+              	  </div>
+              </th>
+              <th class="heading">
+                  <div id="divLeft">id</div>
+                  <div id="divRight">
+                      <div ng-click="myOrderBy('id','up')"><i class="fa fa-chevron-up cursor"></i></div>
+                      <div ng-click="myOrderBy('id','down')"><i class="fa fa-chevron-down cursor"></i></div>
+              	  </div>
+              </th>
+              <th class="heading">
+                   <div id="divLeft">title</div>
+                   <div id="divRight">
+                      <div ng-click="myOrderBy('title','up')"><i class="fa fa-chevron-up cursor"></i></div>
+                      <div ng-click="myOrderBy('title','down')"><i class="fa fa-chevron-down cursor"></i></div>
+              	  </div>
+              </th>
+              <th class="heading">
+                    <div id="divLeft">body</div>
+                    <div id="divRight">
+                      <div ng-click="myOrderBy('body','up')"><i class="fa fa-chevron-up cursor"></i></div>
+                      <div ng-click="myOrderBy('body','down')"><i class="fa fa-chevron-down cursor"></i></div>
+              	  </div>
+              </th>
+         </thead>
+         <tbody>
+              <tr ng-repeat="data in tableData | orderBy : myOrder : reverse">
+                  <td>{{data.userId}}</td>
+                  <td>{{data.id}}</td>
+                  <td>{{data.title}}</td>
+                  <td>{{data.body}}</td>
+              </tr>
+         </tbody>
+     </table>
+   <script>
+       var app = angular.module('sortedTableApp',[]);
+       app.controller('sortedTableCtrl',function($scope,$http){
+            $http.get('http://jsonplaceholder.typicode.com/posts').then(function(result){
+                $scope.tableData = result.data;
+            },function(error){
+                console.log(error);
+            })
+           
+            $scope.myOrderBy = function(x,sym){
+               if(sym === 'up'){
+                    $scope.myOrder = x;
+                    $scope.reverse = true;
+               }else{
+               	    $scope.myOrder = x;
+                    $scope.reverse = false;
+               }
+            }
+       }) 
+   </script>
+</body>
+</html>
